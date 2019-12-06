@@ -3,27 +3,18 @@ const express = require('express');
 const router = express.Router();
 
 const projectModel = require('../data/helpers/projectModel.js');
-// const dB = require('../data/lambda.db3');
 
-
-//Trying to get the query to work to show ALL projects.
-// router.get('/', (req, res) => {
-
-
-//     projectModel.get(req.query)
-//         // .then(projects => {
-//             const sortField = req.query.sortby || 'id';
-
-//             const response = dB.sort(
-//                 (a, b) => (a[sortField] < b[sortField] ? -1 : 1)
-//               );
-//             res.status(200).json({ response })
-//         // })
-//         // .catch(error => {
-//         //     console.log(error);
-//         //     res.status(500).json({ error: "The project could not be retrieved." });
-//         // });
-// });
+// GET all projects
+router.get('/', (req, res) => {
+    projectModel.get()
+        .then(projects => {
+            res.status(200).json({ projects })
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ error: "Projects could not be retrieved." });
+        });
+});
 
 // GET a single project
 router.get('/:id', (req, res) => {
