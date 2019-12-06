@@ -3,18 +3,29 @@ const express = require('express');
 const router = express.Router();
 
 const projectModel = require('../data/helpers/projectModel.js');
+// const dB = require('../data/lambda.db3');
 
-router.get('/', (req, res) => {
-    projectModel.get(req.query)
-        .then(projects => {
-            res.status(200).json({ projects })
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({ error: "The project could not be retrieved." });
-        });
-});
 
+//Trying to get the query to work to show ALL projects.
+// router.get('/', (req, res) => {
+
+
+//     projectModel.get(req.query)
+//         // .then(projects => {
+//             const sortField = req.query.sortby || 'id';
+
+//             const response = dB.sort(
+//                 (a, b) => (a[sortField] < b[sortField] ? -1 : 1)
+//               );
+//             res.status(200).json({ response })
+//         // })
+//         // .catch(error => {
+//         //     console.log(error);
+//         //     res.status(500).json({ error: "The project could not be retrieved." });
+//         // });
+// });
+
+// GET a single project
 router.get('/:id', (req, res) => {
     projectModel.get(req.params.id)
         .then(project => {
@@ -30,6 +41,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// GET all actions for single project
 router.get('/:id/actions', (req, res) => {
     projectModel.getProjectActions(req.params.id)
     .then(projectActions => {
@@ -45,6 +57,7 @@ router.get('/:id/actions', (req, res) => {
     });
 })
 
+// POST to create a new project
 router.post('/', (req, res) => {
     const projectData = req.body;
     if (!projectData.name || !projectData.description) {
@@ -61,6 +74,7 @@ router.post('/', (req, res) => {
     }
 });
 
+// PUT to update/change an existing project
 router.put('/:id', (req, res) => {
     const changes = req.body;
     const id = req.params.id;
@@ -82,6 +96,7 @@ router.put('/:id', (req, res) => {
         })
 });
 
+// DELETE an existing project
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
     let deletedProject = {}

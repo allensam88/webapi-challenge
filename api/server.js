@@ -8,7 +8,7 @@ server.use('/api/projects', projectRouter);
 server.use('/api/actions', actionRouter);
 
 server.get('/', (req, res) => {
-    res.send(`<h2>Welcom to your projects & actions!</h2>`);
+    res.send(`<h2>Welcome to your projects & actions!</h2>`);
 });
 
 module.exports = server;
