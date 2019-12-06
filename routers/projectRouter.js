@@ -28,39 +28,35 @@ router.post('/', (req, res) => {
         });
 });
 
-// router.put('/:id', validateUserId, (req, res) => {
-//     const changes = req.body;
-//     const id = req.params.id;
-//     userDb.update(id, changes)
-//         .then(count => {
-//             userDb.getById(id)
-//                 .then(updatedUser => {
-//                     res.status(200).json({ updatedUser, message: "The user has been modified." });
-//                 })
-//         })
-//         .catch(error => {
-//             console.log(error);
-//             res.status(500).json({ error: "The user information could not be modified." });
-//         });
-// });
+router.put('/:id', (req, res) => {
+    const changes = req.body;
+    const id = req.params.id;
+    projectModel.update(id, changes)
+        .then(updatedProject => {
+            res.status(200).json({ updatedProject, message: "The project has been modified." });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ error: "The project information could not be modified." });
+        });
+});
 
-// router.delete('/:id', validateUserId, (req, res) => {
-//     let deletedUser = {}
-//     userDb.getById(req.params.id)
-//         .then(user => {
-//             deletedUser = user
-//         })
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    let deletedProject = {}
+    projectModel.get(id)
+        .then(project => {
+            deletedProject = project
+        })
 
-//     userDb.remove(req.params.id)
-//         .then(count => {
-//             res.status(200).json({ deletedUser, message: "User has been successfully deleted." })
-//         })
-//         .catch(error => {
-//             console.log(error);
-//             res.status(500).json({ error: "The user could not be removed" });
-//         });
-// });
-
-
+    projectModel.remove(id)
+        .then(count => {
+            res.status(200).json({ deletedProject, message: "Project has been successfully deleted." })
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ error: "The project could not be removed." });
+        });
+});
 
 module.exports = router;
