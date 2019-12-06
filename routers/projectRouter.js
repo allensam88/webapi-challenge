@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 
 const projectModel = require('../data/helpers/projectModel.js');
-const actionModel = require('../data/helpers/actionModel.js');
 
 router.get('/:id', (req, res) => {
     projectModel.get(req.params.id)
