@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Express is an unopinionated framework library that abstracts away common coding tasks.  It is very helpful when creating a simple, compact server API. 
+
 - [ ] Describe Middleware?
+
+Middleware provides a way to abstract out endpoint logic that is being used over and over again.  It’s an extra functional operation that happens when a client taps into an endpoint.  The middleware will run first in the pipeline before getting to the endpoint logic.
 
 - [ ] Describe a Resource?
 
+When designing a RESTful back end server application, a resource can be anything that is accessible by a unique URL and it can take on multiple representations, depending on the purpose of a specific http endpoint request method from client to server.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+A successful response could potentially be 200 which means ‘okay’ for a GET method, 201 which means ‘created’ for a POST method, or perhaps 202 which means ‘accepted’ for a login attempt or PUT or DELETE method.  An accompanying JSON message to go with the status code is also good practice, along with a .catch error message in case it fails with status 500.
+
 - [ ] How can we partition our application into sub-applications?
+
+Creating different router resource files for different URL purposes can help sub-divide the server into discrete, readable chunks of code.  Middleware can also be abstracted out and stored separately.
 
 ## Minimum Viable Product
 
